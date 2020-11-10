@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helm-tls-repo
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: helm-tls-repo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: helm-tls-repo
+    spec:
+      containers:
+        - name: helm-tls-repo
+          image: quay.io/pmacik/helm-tls-repo
+          ports:
+            - containerPort: 80

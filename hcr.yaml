@@ -1,0 +1,13 @@
+apiVersion: helm.openshift.io/v1beta1
+kind: HelmChartRepository
+metadata:
+  name: test-repo
+spec:
+  connectionConfig:
+    url: https://REPO_HOST
+    tlsClientConfig:
+      name: helm-tls-repo
+    ca:
+      name: helm-tls-repo-ca
+
+
