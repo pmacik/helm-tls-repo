@@ -17,16 +17,13 @@ Optional:
 ## Usage
 
 To deploy Helm Repo secured with TLS into OpenShift:
-```sh
-$ ./deploy.sh
-```
+
+[`$ ./deploy.sh`](./deploy.sh)
 
 To undeploy Helm Repo from OpenShift:
-```sh
-$ ./undeploy.sh
-```
+
+[`$ ./undeploy.sh`](./undeploy.sh)
 
 To clean locally generated files:
-```sh
-$ ./clean.sh
-```
+
+[`$ ./clean.sh`](./clean.sh)
