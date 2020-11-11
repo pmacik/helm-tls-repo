@@ -7,7 +7,6 @@ for i in svc deploy route; do
     oc delete $i helm-tls-repo -n $REPO_NAMESPACE $OC_OPTS
 done
 
-oc delete configmap service-ca -n $REPO_NAMESPACE $OC_OPTS
 oc delete configmap helm-tls-repo-ca -n openshift-config $OC_OPTS
 oc delete secret helm-tls-repo -n openshift-config $OC_OPTS
 

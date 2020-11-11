@@ -14,18 +14,15 @@ REPO_NAMESPACE=${REPO_NAMESPACE:-default}
 REPO_IMAGE=${REPO_IMAGE:-quay.io/$QUAY_USERNAME/helm-tls-repo}
 
 # Extract CA
-oc get secret signing-key -n openshift-service-ca -o json | jq -rc '.data."tls.key"' | base64 --decode >serverca.key 
-oc get secret signing-key -n openshift-service-ca -o json | jq -rc '.data."tls.crt"' | base64 --decode >serverca.crt
-oc create configmap service-ca -n $REPO_NAMESPACE
-oc annotate configmap service-ca -n $REPO_NAMESPACE "service.beta.openshift.io/inject-cabundle=true"
-oc get configmap service-ca -n $REPO_NAMESPACE -o json | jq -rc '.data."service-ca.crt"' > ca-bundle.crt
+oc get secret signing-key -n openshift-service-ca -o json | jq -rc '.data."tls.key"' | base64 --decode >ca-bundle.key 
+oc get secret signing-key -n openshift-service-ca -o json | jq -rc '.data."tls.crt"' | base64 --decode >ca-bundle.crt ## needs to be named this way for 'helm-tls-repo-ca' config map used by HCR
 
 # Helm Repo App
 sed -e "s,@@DOMAIN@@,$DOMAIN,g" ssl_server.template.conf > ssl_server.conf
 
 openssl genrsa -out server.key 2048
 openssl req -new -key server.key -config ssl_server.conf -out server.csr
-openssl x509 -req -in server.csr -days 365 -sha256 -CAcreateserial -CA serverca.crt -CAkey serverca.key -out server.crt
+openssl x509 -req -in server.csr -days 365 -sha256 -CAcreateserial -CA ca-bundle.crt -CAkey ca-bundle.key -out server.crt
 
 ## Build Helm Repo App
 $CE build -t $REPO_IMAGE -f Dockerfile .
