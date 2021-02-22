@@ -8,7 +8,7 @@ QUAY_PASSWORD=${QUAY_PASSWORD:-}
 echo -n ${QUAY_PASSWORD} | $CE login quay.io -u ${QUAY_USERNAME} --password-stdin
 set -x
 
-DOMAIN=${DOMAIN:-apps-crc.testing} # default domain for CRC
+DOMAIN=${DOMAIN:-$(oc get route console -n openshift-console -o jsonpath='{.status.ingress[0].routerCanonicalHostname}')}
 REPO_HOST=htr.$DOMAIN
 REPO_NAMESPACE=${REPO_NAMESPACE:-default}
 REPO_IMAGE=${REPO_IMAGE:-quay.io/$QUAY_USERNAME/helm-tls-repo}

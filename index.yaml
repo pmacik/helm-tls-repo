@@ -1,26 +1,18 @@
 apiVersion: v1
 entries:
-  alpine:
-  - apiVersion: v1
-    created: "2020-10-20T15:10:00.775596333+05:30"
-    description: Deploy a basic Alpine Linux pod
-    digest: 99c76e403d752c84ead610644d4b1c2f2b453a74b921f422b9dcb8a7c8b559cd
-    home: https://k8s.io/helm
-    name: alpine
+  nginx:
+  - appVersion: 1.16.0
+    created: 2021-02-16T10:13:15.681Z
+    description: A NGINX Docker Community based Helm chart for Kubernetes
+    digest: 653b11d9fc27c423c3207705c4eacce88ba55a1fa4824feeb0b7618548bc3f88
+    maintainers:
+    - email: helmcharts@mirantis.com
+      name: Mirantis
+    name: nginx
     sources:
-    - https://github.com/kubernetes/helm
+    - https://github.com/mirantis/helm-charts
+    - http://www.nginx.org
     urls:
-    - alpine-0.2.0.tgz
-    version: 0.2.0
-  - apiVersion: v1
-    created: "2020-10-20T15:10:00.775380123+05:30"
-    description: Deploy a basic Alpine Linux pod
-    digest: 515c58e5f79d8b2913a10cb400ebb6fa9c77fe813287afbacf1a0b897cd78727
-    home: https://k8s.io/helm
-    name: alpine
-    sources:
-    - https://github.com/kubernetes/helm
-    urls:
-    - alpine-0.1.0.tgz
+    - nginx-0.1.0.tgz
     version: 0.1.0
-generated: "2020-10-20T15:10:00.774871319+05:30"
+generated: 2021-02-16T10:13:16.717Z
